@@ -24,7 +24,7 @@
         android:id="@+id/NameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="36dp"
         android:fontFamily="@font/akronim"
         android:text="Dovahkiin Code"
         android:textColor="@color/color_launch"
@@ -37,11 +37,13 @@
         android:id="@+id/ByTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:fontFamily="@font/akronim"
         android:text="By"
         android:textColor="@color/color_launch"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/NameTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
