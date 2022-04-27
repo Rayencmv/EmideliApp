@@ -1,10 +1,13 @@
 package com.martinez.emideliapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,11 +19,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags (WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags (WindowManager.LayoutParams
+                .FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        Animation animacion1 = AnimationUtils.loadAnimation( this, R.anim.desplazamiento_arriba);
-        Animation animacion2 = AnimationUtils.loadAnimation( this, R.anim.desplazamiento_arriba);
+        Animation animacion1 = AnimationUtils.loadAnimation
+                ( this, R.anim.desplazamiento_arriba);
+        Animation animacion2 = AnimationUtils.loadAnimation
+                ( this, R.anim.desplazamiento_arriba);
 
         TextView ByTextView = findViewById(R.id.ByTextView);
         TextView NameTextView = findViewById( R.id.NameTextView);
@@ -40,5 +46,7 @@ public class MainActivity extends AppCompatActivity {
         },4000);
 
 
+
     }
+
 }
