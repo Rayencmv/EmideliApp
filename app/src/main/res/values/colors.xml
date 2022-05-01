@@ -10,4 +10,7 @@
     <color name="BackgroundColor">#B6B6B6</color>
     <color name="color_launch">#9575cd</color>
     <color name="color_hint">#616161</color>
+    <color name="color_background">#c4f9e7</color>
+    <color name="color_text">#80214a</color>
+    <color name="color_titles">#3b487f</color>
 </resources>

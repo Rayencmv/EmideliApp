@@ -5,8 +5,11 @@
       <map>
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/font/.xml" value="0.12291666666666666" />
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/font/akronim.xml" value="0.1" />
+        <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/layout/activity_caledario.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/layout/activity_cliente.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/layout/activity_menu.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>
