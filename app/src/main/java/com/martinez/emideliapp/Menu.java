@@ -24,11 +24,6 @@ public class Menu extends AppCompatActivity {
         startActivity(AbrirPedido);
     }
 
-    public void CambioRegistroU(View view){
-        Intent AbrirUsuario = new Intent(Menu.this ,Usuario.class);
-        startActivity(AbrirUsuario);
-    }
-
     public void CambioRegistroC(View view){
         Intent AbrirCliente = new Intent(Menu.this ,Cliente.class);
         startActivity(AbrirCliente);

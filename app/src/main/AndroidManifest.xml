@@ -13,9 +13,6 @@
             android:name=".Pedido"
             android:exported="false" />
         <activity
-            android:name=".Usuario"
-            android:exported="false" />
-        <activity
             android:name=".Cliente"
             android:exported="false" />
         <activity
