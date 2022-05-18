@@ -48,10 +48,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Usuario=txtUsuario.getText().toString();
-                Toast.makeText(getApplicationContext(), Usuario, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), Usuario, Toast.LENGTH_SHORT).show();
                 Password=txtPassword.getText().toString();
                 if (!Usuario.isEmpty() && !Password.isEmpty()){
-                    EjecutarServicio("http:/10.0.2.2/emideli/validar_usuarioo.php");
+                    EjecutarServicio("https://emideliuwu.000webhostapp.com/validar_usuarioo.php");
                 }else if(Usuario.isEmpty()){
                     Toast.makeText(Login.this, "Falta el Correo",Toast.LENGTH_SHORT).show();
                 }else if(Password.isEmpty()){
@@ -74,6 +74,7 @@ public class Login extends AppCompatActivity {
                             intent.addCategory(Intent.CATEGORY_HOME);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+                            finish();
                         }
                     })
                     .setNegativeButton
@@ -90,7 +91,7 @@ public class Login extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //GuardarPreferencia();
+                GuardarPreferencia();
                 if (!response.isEmpty()){
                     Intent AbrirMenu = new Intent(Login.this ,Menu.class);
                     startActivity(AbrirMenu);

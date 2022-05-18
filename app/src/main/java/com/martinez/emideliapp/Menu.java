@@ -1,7 +1,9 @@
 package com.martinez.emideliapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +26,8 @@ public class Menu extends AppCompatActivity {
         startActivity(AbrirPedido);
     }
 
-    public void CambioRegistroC(View view){
-        Intent AbrirCliente = new Intent(Menu.this ,Cliente.class);
+    public void CambioRegistroC(View view) {
+        Intent AbrirCliente = new Intent(Menu.this, Cliente.class);
         startActivity(AbrirCliente);
     }
 

@@ -38,7 +38,7 @@ public class Cliente extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EjecutarServicio("http:/10.0.2.2/emideli/addCliente.php");
+                EjecutarServicio("https://emideliuwu.000webhostapp.com/addCliente.php");
             }
         });
 
@@ -69,6 +69,7 @@ public class Cliente extends AppCompatActivity {
                     RequestQueue requestQueue= Volley.newRequestQueue(this);
                     requestQueue.add (stringRequest);
         }
+
 
     }
 
