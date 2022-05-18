@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), Usuario, Toast.LENGTH_SHORT).show();
                 Password=txtPassword.getText().toString();
                 if (!Usuario.isEmpty() && !Password.isEmpty()){
-                    EjecutarServicio("http://localhost/emideli/validar_usuarioo.php");
+                    EjecutarServicio("http:/10.0.2.2/emideli/validar_usuarioo.php");
                 }else if(Usuario.isEmpty()){
                     Toast.makeText(Login.this, "Falta el Correo",Toast.LENGTH_SHORT).show();
                 }else if(Password.isEmpty()){

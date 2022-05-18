@@ -38,7 +38,7 @@ public class Cliente extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //EjecutarServicio(Base de Datos);
+                EjecutarServicio("http:/10.0.2.2/emideli/addCliente.php");
             }
         });
 
