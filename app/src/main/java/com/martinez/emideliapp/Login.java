@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), Usuario, Toast.LENGTH_SHORT).show();
                 Password=txtPassword.getText().toString();
                 if (!Usuario.isEmpty() && !Password.isEmpty()){
-                    EjecutarServicio("https://emideliuwu.000webhostapp.com/validar_usuarioo.php");
+                    EjecutarServicio("https://emideli.online/validar_usuarioo.php");
                 }else if(Usuario.isEmpty()){
                     Toast.makeText(Login.this, "Falta el Correo",Toast.LENGTH_SHORT).show();
                 }else if(Password.isEmpty()){
@@ -126,13 +126,6 @@ public class Login extends AppCompatActivity {
         editor.putString("contrasenia",Password);
         editor.putBoolean("session",true);
         editor.commit();
-    }
-
-    private void RecuperarPreferencias(){
-        SharedPreferences preferences= getSharedPreferences("PreferenciasLogin",Context.MODE_PRIVATE);
-        txtUsuario.setText(preferences.getString("usuario","micorreo@gmail.com"));
-        txtPassword.setText(preferences.getString("contrasenia","12345678"));
-
     }
 
 }

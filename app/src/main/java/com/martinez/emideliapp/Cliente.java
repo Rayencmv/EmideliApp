@@ -2,6 +2,7 @@ package com.martinez.emideliapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 public class Cliente extends AppCompatActivity {
 
@@ -38,7 +41,10 @@ public class Cliente extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EjecutarServicio("https://emideliuwu.000webhostapp.com/addCliente.php");
+                EjecutarServicio("https://emideli.online/addCliente.php");
+                txtNombre.setText("");
+                txtNumero.setText("");
+                txtDireccion.setText("");
             }
         });
 
@@ -49,7 +55,13 @@ public class Cliente extends AppCompatActivity {
     StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Clientito Ingresadito", Toast.LENGTH_SHORT).show();
+            new StyleableToast
+                    .Builder(getApplicationContext())
+                    .text("Clientito Ingresadito")
+                    .textColor(Color.WHITE)
+                    .backgroundColor(Color.MAGENTA)
+                    .show();
         }
     },new Response.ErrorListener(){
             public void onErrorResponse (VolleyError error) {
