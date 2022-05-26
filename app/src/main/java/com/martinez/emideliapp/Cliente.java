@@ -1,7 +1,5 @@
 package com.martinez.emideliapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -42,9 +41,9 @@ public class Cliente extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EjecutarServicio("https://emideli.online/addCliente.php");
-                txtNombre.setText("");
-                txtNumero.setText("");
-                txtDireccion.setText("");
+//                txtNombre.setText("");
+//                txtNumero.setText("");
+//                txtDireccion.setText("");
             }
         });
 
@@ -55,17 +54,21 @@ public class Cliente extends AppCompatActivity {
     StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            //Toast.makeText(getApplicationContext(), "Clientito Ingresadito", Toast.LENGTH_SHORT).show();
             new StyleableToast
                     .Builder(getApplicationContext())
                     .text("Clientito Ingresadito")
-                    .textColor(Color.WHITE)
-                    .backgroundColor(Color.MAGENTA)
+                    .textColor(Color.BLACK)
+                    .backgroundColor(Color.TRANSPARENT)
                     .show();
         }
     },new Response.ErrorListener(){
             public void onErrorResponse (VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                new StyleableToast
+                        .Builder(getApplicationContext())
+                        .text(Error.class.toString())
+                        .textColor(Color.BLACK)
+                        .backgroundColor(Color.TRANSPARENT)
+                        .show();
             }
         })
             {

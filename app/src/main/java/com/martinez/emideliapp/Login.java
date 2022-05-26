@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,6 +28,8 @@ import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 public class Login extends AppCompatActivity {
 
     EditText txtUsuario, txtPassword;
@@ -41,21 +44,28 @@ public class Login extends AppCompatActivity {
         txtUsuario = findViewById(R.id.txtUsuario);
         txtPassword = findViewById(R.id.txtPassword);
         btnIniciar = findViewById(R.id.btnIniciar);
-        //RecuperarPreferencias();
-
 
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Usuario=txtUsuario.getText().toString();
-                //Toast.makeText(getApplicationContext(), Usuario, Toast.LENGTH_SHORT).show();
                 Password=txtPassword.getText().toString();
                 if (!Usuario.isEmpty() && !Password.isEmpty()){
                     EjecutarServicio("https://emideli.online/validar_usuarioo.php");
                 }else if(Usuario.isEmpty()){
-                    Toast.makeText(Login.this, "Falta el Correo",Toast.LENGTH_SHORT).show();
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text("Falta Correo")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
                 }else if(Password.isEmpty()){
-                    Toast.makeText(Login.this, "Falta la Contraseña",Toast.LENGTH_SHORT).show();
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text("Falta Contraseña")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
                 }
 
             }
@@ -96,14 +106,22 @@ public class Login extends AppCompatActivity {
                     Intent AbrirMenu = new Intent(Login.this ,Menu.class);
                     startActivity(AbrirMenu);
                 }else{
-                    Toast.makeText(Login.this, "Error", Toast.LENGTH_SHORT).show();
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text("Error")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
                 }
-                //Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
-                //finish();
             }
         },new Response.ErrorListener(){
             public void onErrorResponse (VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(),Toast.LENGTH_SHORT).show();
+                new StyleableToast
+                        .Builder(getApplicationContext())
+                        .text(Error.class.toString())
+                        .textColor(Color.WHITE)
+                        .backgroundColor(Color.RED)
+                        .show();
             }
         })
         {

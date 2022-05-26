@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Emideli</string>
+
+    <string-array name="TipoPedido">
+        <item>Seleccione</item>
+        <item>Personalizado</item>
+        <item>Predefinido</item>
+    </string-array>
+
+    <string-array name="NombreCliente">
+        <item>Seleccione</item>
+    </string-array>
 </resources>
