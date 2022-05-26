@@ -9,20 +9,22 @@
     tools:context=".Pedido">
 
     <Button
-        android:id="@+id/btnIngresarC2"
+        android:id="@+id/btnIngresarP"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="107dp"
+        android:layout_height="35dp"
         android:layout_marginTop="40dp"
         android:text="Agregar"
-        android:textColor="@color/color_hint"
+        android:textColor="@color/color_buttons"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAbono"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/txtTotal"
         android:layout_width="163dp"
         android:layout_height="55dp"
         android:layout_marginTop="30dp"
@@ -32,19 +34,19 @@
         android:inputType="textPersonName"
         android:textColorHint="@color/color_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtEntrega"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="361dp"
-        android:layout_height="387dp"
+        android:layout_width="385dp"
+        android:layout_height="397dp"
         android:alpha="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/agregarpedido" />
+        app:srcCompat="@drawable/pedido" />
 
     <TextView
         android:id="@+id/textView"
@@ -60,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbNuevo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -71,18 +73,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spTipoPedido"
         style="@style/Widget.AppCompat.Spinner.DropDown"
         android:layout_width="279dp"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/spCliente"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/txtAbono"
         style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="163dp"
         android:layout_height="55dp"
@@ -93,11 +95,11 @@
         android:inputType="textPersonName"
         android:textColorHint="@color/color_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtEntrega"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/txtEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="212dp"
@@ -108,21 +110,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/spTipoPedido"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spCliente"
         android:layout_width="279dp"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreC"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/txtNombreC"
         style="@style/Widget.AppCompat.TextView"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
@@ -135,5 +137,20 @@
         android:textColorHint="@color/color_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btnVer"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="146dp"
+        android:layout_height="36dp"
+        android:text="Ver Galletitas"
+        android:textColor="@color/color_launch"
+        android:textColorLink="#a0c6ff"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIngresarP"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

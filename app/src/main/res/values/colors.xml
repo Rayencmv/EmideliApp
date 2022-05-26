@@ -13,6 +13,7 @@
     <color name="color_background">#f9eaff</color>
     <color name="color_text">#80214a</color>
     <color name="color_titles">#a07c82</color>
+    <color name="color_buttons">#a0c6ff</color>
 
     <color name="mytoast">
         <item name="stTextBold">true</item>
