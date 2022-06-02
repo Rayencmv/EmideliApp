@@ -55,23 +55,11 @@ public class Pedido extends AppCompatActivity {
         pedido = new AsyncHttpClient();
         CargarTipoPedido();
         LlenarSpinner();
+        ClienteNuevo();
 
-        cbNuevo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if ( cbNuevo.isChecked()==false )
-                {
-                    spCliente.setEnabled(true);
-                    txtNombreC.setFreezesText(false);
-
-                }else{
-                    spCliente.setEnabled(false);
-                    txtNombreC.setFreezesText(true);
-                }
-            }
-        });
     }
 
+    //llena los datos del spinner con el nombre del cliente
     private void LlenarSpinner (){
         String url = "https://emideli.online/obtenerDatos.php";
         pedido.post(url, new AsyncHttpResponseHandler() {
@@ -90,6 +78,26 @@ public class Pedido extends AppCompatActivity {
     }
 
 
+
+    //controla si el cliente es nuevo o ya esta agregado en la base de datos
+    private void ClienteNuevo(){
+        cbNuevo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ( cbNuevo.isChecked()==false )
+                {
+                    spCliente.setEnabled(true);
+                    txtNombreC.setFreezesText(false);
+
+                }else{
+                    spCliente.setEnabled(false);
+                    txtNombreC.setFreezesText(true);
+                }
+            }
+        });
+    }
+
+    //seleccionar tipo de pedido si es personalizado o si es predeterminado
     private void CargarTipoPedido(){
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -100,6 +108,7 @@ public class Pedido extends AppCompatActivity {
         spTipoPedido.setAdapter(adapter);
     }
 
+    // se carga el spinner de tipo de pedido
     private void CargarSpinner(String respuesta){
         ArrayList<Pedidos> lista = new ArrayList<Pedidos>();
 
