@@ -35,7 +35,7 @@ public class Pedido extends AppCompatActivity {
 
     AsyncHttpClient pedido;
     Button btnAgregarP, btnImagen;
-    EditText txtFecha, txtTotal, txtNombreC, txtAbono;
+    EditText txtFecha, txtTotal, txtNombreC, txtAbono, txtDescripcion;
     CheckBox cbNuevo;
     Spinner spTipoPedido, spCliente;
 
@@ -51,21 +51,24 @@ public class Pedido extends AppCompatActivity {
         cbNuevo = findViewById(R.id.cbNuevo);
         spTipoPedido = findViewById(R.id.spTipoPedido);
         spCliente = findViewById(R.id.spCliente);
+        txtDescripcion = findViewById(R.id.txtDescripcion);
+        btnImagen = findViewById(R.id.btnImagen);
 
         pedido = new AsyncHttpClient();
         CargarTipoPedido();
         LlenarSpinner();
         ClienteNuevo();
 
+
     }
 
     //llena los datos del spinner con el nombre del cliente
-    private void LlenarSpinner (){
+    private void LlenarSpinner() {
         String url = "https://emideli.online/obtenerDatos.php";
         pedido.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode==200){
+                if (statusCode == 200) {
                     CargarSpinner(new String(responseBody));
                 }
             }
@@ -78,18 +81,16 @@ public class Pedido extends AppCompatActivity {
     }
 
 
-
     //controla si el cliente es nuevo o ya esta agregado en la base de datos
-    private void ClienteNuevo(){
+    private void ClienteNuevo() {
         cbNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( cbNuevo.isChecked()==false )
-                {
+                if (cbNuevo.isChecked() == false) {
                     spCliente.setEnabled(true);
                     txtNombreC.setFreezesText(false);
 
-                }else{
+                } else {
                     spCliente.setEnabled(false);
                     txtNombreC.setFreezesText(true);
                 }
@@ -98,7 +99,7 @@ public class Pedido extends AppCompatActivity {
     }
 
     //seleccionar tipo de pedido si es personalizado o si es predeterminado
-    private void CargarTipoPedido(){
+    private void CargarTipoPedido() {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.TipoPedido, android.R.layout.simple_spinner_item);
@@ -109,25 +110,105 @@ public class Pedido extends AppCompatActivity {
     }
 
     // se carga el spinner de tipo de pedido
-    private void CargarSpinner(String respuesta){
+    private void CargarSpinner(String respuesta) {
         ArrayList<Pedidos> lista = new ArrayList<Pedidos>();
 
         try {
             String s = "Seleccione";
             JSONArray jsonArreglo = new JSONArray(respuesta);
-            Pedidos p1= new Pedidos();
+            Pedidos p1 = new Pedidos();
             lista.add(new Pedidos("Seleccione"));
-            for (int i=0;i<jsonArreglo.length();i++){
-                Pedidos p2= new Pedidos();
+            for (int i = 0; i < jsonArreglo.length(); i++) {
+                Pedidos p2 = new Pedidos();
                 p2.setNombreCliente(jsonArreglo.getJSONObject(i).getString("Nombre"));
                 lista.add(p2);
             }
-            ArrayAdapter<Pedidos> a = new ArrayAdapter<Pedidos>(this, android.R.layout.simple_dropdown_item_1line,lista);
+            ArrayAdapter<Pedidos> a = new ArrayAdapter<Pedidos>(this, android.R.layout.simple_dropdown_item_1line, lista);
             spCliente.setAdapter(a);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void EjecutarServicio(String URL) {
+        if (cbNuevo.isChecked() == false) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text("Pedido Ingresado")
+                            .textColor(Color.BLACK)
+                            .backgroundColor(Color.TRANSPARENT)
+                            .show();
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse (VolleyError error) {
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text(Error.class.toString())
+                            .textColor(Color.BLACK)
+                            .backgroundColor(Color.TRANSPARENT)
+                            .show();
+                }
+            })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
+                    parametros.put("Nombre", spCliente.getSelectedItem().toString());
+                    parametros.put("Abono", txtAbono.getText().toString());
+                    parametros.put("Fecha", txtFecha.getText().toString());
+                    parametros.put("Imagen", btnImagen.getText().toString());
+                    parametros.put("Total", txtTotal.getText().toString());
+                    parametros.put("Descripcion", txtDescripcion.getText().toString());
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue= Volley.newRequestQueue(this);
+            requestQueue.add (stringRequest);
+        }else {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text("Pedido Ingresado")
+                            .textColor(Color.BLACK)
+                            .backgroundColor(Color.TRANSPARENT)
+                            .show();
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse (VolleyError error) {
+                    new StyleableToast
+                            .Builder(getApplicationContext())
+                            .text(Error.class.toString())
+                            .textColor(Color.BLACK)
+                            .backgroundColor(Color.TRANSPARENT)
+                            .show();
+                }
+            })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
+                    parametros.put("Nombre", txtNombreC.getText().toString());
+                    parametros.put("Abono", txtAbono.getText().toString());
+                    parametros.put("Fecha", txtFecha.getText().toString());
+                    parametros.put("Imagen", btnImagen.getText().toString());
+                    parametros.put("Total", txtTotal.getText().toString());
+                    parametros.put("Descripcion", txtDescripcion.getText().toString());
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue= Volley.newRequestQueue(this);
+            requestQueue.add (stringRequest);
 
+
+        }
+
+
+    }
 }

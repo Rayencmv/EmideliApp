@@ -14,25 +14,32 @@
         android:theme="@style/Theme.EmideliApp">
         <activity
             android:name=".Pedido"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Cliente"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Caledario"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Menu"
-            android:exported="false"/>
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Login"
-            android:exported="false"/>
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
 
 
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="portrait">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
