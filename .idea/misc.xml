@@ -7,6 +7,8 @@
         <entry key="..\:/Users/Alumnos/StudioProjects/EmideliApp/app/src/main/res/layout/activity_cliente.xml" value="0.22" />
         <entry key="..\:/Users/Alumnos/StudioProjects/EmideliApp/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Alumnos/StudioProjects/EmideliApp/app/src/main/res/layout/activity_pedido.xml" value="0.25" />
+        <entry key="..\:/Users/LIA/StudioProjects/EmideliApp/app/src/main/res/layout/activity_cliente.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/LIA/StudioProjects/EmideliApp/app/src/main/res/layout/activity_pedido.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/font/.xml" value="0.12291666666666666" />
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/font/akronim.xml" value="0.1" />
         <entry key="..\:/Users/Rayen/AndroidStudioProjects/EmideliApp/app/src/main/res/layout/activity_caledario.xml" value="0.21041666666666667" />
@@ -19,10 +21,17 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.29717180244829045" />
+      </ProjectState>
+    </option>
   </component>
 </project>

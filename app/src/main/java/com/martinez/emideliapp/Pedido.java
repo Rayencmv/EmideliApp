@@ -58,10 +58,20 @@ public class Pedido extends AppCompatActivity {
         CargarTipoPedido();
         LlenarSpinner();
         ClienteNuevo();
+        GuardarPedido();
 
 
     }
 
+
+    private void GuardarPedido(){
+        btnAgregarP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EjecutarServicio("https://emideli.online/addPedido.php");
+            }
+        });
+    }
     //llena los datos del spinner con el nombre del cliente
     private void LlenarSpinner() {
         String url = "https://emideli.online/obtenerDatos.php";
@@ -88,11 +98,11 @@ public class Pedido extends AppCompatActivity {
             public void onClick(View view) {
                 if (cbNuevo.isChecked() == false) {
                     spCliente.setEnabled(true);
-                    txtNombreC.setFreezesText(false);
+                    txtNombreC.setEnabled(false);
 
                 } else {
                     spCliente.setEnabled(false);
-                    txtNombreC.setFreezesText(true);
+                    txtNombreC.setEnabled(true);
                 }
             }
         });
@@ -131,7 +141,6 @@ public class Pedido extends AppCompatActivity {
     }
 
     private void EjecutarServicio(String URL) {
-        if (cbNuevo.isChecked() == false) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -156,50 +165,24 @@ public class Pedido extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
-                    parametros.put("Nombre", spCliente.getSelectedItem().toString());
-                    parametros.put("Abono", txtAbono.getText().toString());
-                    parametros.put("Fecha", txtFecha.getText().toString());
-                    parametros.put("Imagen", btnImagen.getText().toString());
-                    parametros.put("Total", txtTotal.getText().toString());
-                    parametros.put("Descripcion", txtDescripcion.getText().toString());
-                    return parametros;
-                }
-            };
-            RequestQueue requestQueue= Volley.newRequestQueue(this);
-            requestQueue.add (stringRequest);
-        }else {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    new StyleableToast
-                            .Builder(getApplicationContext())
-                            .text("Pedido Ingresado")
-                            .textColor(Color.BLACK)
-                            .backgroundColor(Color.TRANSPARENT)
-                            .show();
-                }
-            },new Response.ErrorListener(){
-                public void onErrorResponse (VolleyError error) {
-                    new StyleableToast
-                            .Builder(getApplicationContext())
-                            .text(Error.class.toString())
-                            .textColor(Color.BLACK)
-                            .backgroundColor(Color.TRANSPARENT)
-                            .show();
-                }
-            })
-            {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
-                    parametros.put("Nombre", txtNombreC.getText().toString());
-                    parametros.put("Abono", txtAbono.getText().toString());
-                    parametros.put("Fecha", txtFecha.getText().toString());
-                    parametros.put("Imagen", btnImagen.getText().toString());
-                    parametros.put("Total", txtTotal.getText().toString());
-                    parametros.put("Descripcion", txtDescripcion.getText().toString());
+                    if (cbNuevo.isChecked()==true) {
+                        parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
+                        parametros.put("NombreC", txtNombreC.getText().toString());
+                        parametros.put("Abono", txtAbono.getText().toString());
+                        parametros.put("Fecha", txtFecha.getText().toString());
+                        parametros.put("Imagen", btnImagen.getText().toString());
+                        parametros.put("Total", txtTotal.getText().toString());
+                        parametros.put("Descripcion", txtDescripcion.getText().toString());
+                    }else {
+                        parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
+                        parametros.put("NombreC", spCliente.getSelectedItem().toString());
+                        parametros.put("Abono", txtAbono.getText().toString());
+                        parametros.put("Fecha", txtFecha.getText().toString());
+                        parametros.put("Imagen", btnImagen.getText().toString());
+                        parametros.put("Total", txtTotal.getText().toString());
+                        parametros.put("Descripcion", txtDescripcion.getText().toString());
+                    }
+
                     return parametros;
                 }
             };
@@ -211,4 +194,3 @@ public class Pedido extends AppCompatActivity {
 
 
     }
-}
