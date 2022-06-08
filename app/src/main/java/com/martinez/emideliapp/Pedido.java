@@ -4,12 +4,14 @@ import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.loopj.android.http.*;
@@ -25,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,10 +37,11 @@ import io.github.muddz.styleabletoast.StyleableToast;
 public class Pedido extends AppCompatActivity {
 
     AsyncHttpClient pedido;
-    Button btnAgregarP, btnImagen;
+    Button btnAgregarP, btnImagen, btnFecha;
     EditText txtFecha, txtTotal, txtNombreC, txtAbono, txtDescripcion;
     CheckBox cbNuevo;
     Spinner spTipoPedido, spCliente;
+    private  int dia,mes,ano;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +57,22 @@ public class Pedido extends AppCompatActivity {
         spCliente = findViewById(R.id.spCliente);
         txtDescripcion = findViewById(R.id.txtDescripcion);
         btnImagen = findViewById(R.id.btnImagen);
+        btnFecha = findViewById(R.id.btnFecha);
 
         pedido = new AsyncHttpClient();
+        txtFecha.setEnabled(false);
+        txtNombreC.setEnabled(false);
         CargarTipoPedido();
         LlenarSpinner();
         ClienteNuevo();
         GuardarPedido();
+        Fecha();
 
 
     }
 
 
+    //Funcion del boton guardar y conexion con el web service
     private void GuardarPedido(){
         btnAgregarP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +81,7 @@ public class Pedido extends AppCompatActivity {
             }
         });
     }
+
     //llena los datos del spinner con el nombre del cliente
     private void LlenarSpinner() {
         String url = "https://emideli.online/obtenerDatos.php";
@@ -100,9 +110,11 @@ public class Pedido extends AppCompatActivity {
                     spCliente.setEnabled(true);
                     txtNombreC.setEnabled(false);
 
+
                 } else {
                     spCliente.setEnabled(false);
                     txtNombreC.setEnabled(true);
+
                 }
             }
         });
@@ -140,6 +152,7 @@ public class Pedido extends AppCompatActivity {
         }
     }
 
+    //Enviar los datos del pedido al web service para ingresar a la base de datos
     private void EjecutarServicio(String URL) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
@@ -191,7 +204,32 @@ public class Pedido extends AppCompatActivity {
 
 
         }
-        //No me deja Guardar el pussh
+
+        //Funcion del boton para ingresar la fecha de entrega
+        private void Fecha() {
+            btnFecha.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (v == btnFecha) {
+                        final Calendar c = Calendar.getInstance();
+                        dia = c.get(Calendar.DAY_OF_MONTH);
+                        mes = c.get(Calendar.MONTH);
+                        ano = c.get(Calendar.YEAR);
+
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(Pedido.this, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                txtFecha.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            }
+                        }
+                                , ano, mes, dia);
+
+                        datePickerDialog.show();
+                    }
+                }
+            });
+        }
 
 
-    }
+}
+
