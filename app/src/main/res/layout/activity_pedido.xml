@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/txtEntrega"
         app:layout_constraintHorizontal_bias="0.66"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/ImagenPedido"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
@@ -120,6 +120,7 @@
         android:layout_marginTop="212dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
+        android:enabled="false"
         android:hint="Fecha de entrega"
         android:inputType="date"
         android:textColorHint="@color/color_text"
@@ -161,7 +162,7 @@
         android:id="@+id/btnImagen"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="200dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:text="Agregar Imagen"
@@ -171,7 +172,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ImagenPedido"
         android:layout_width="95dp"
         android:layout_height="94dp"
         android:layout_marginTop="14dp"

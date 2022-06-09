@@ -5,15 +5,24 @@ import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.loopj.android.http.*;
 
 import com.android.volley.AuthFailureError;
@@ -26,6 +35,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -36,12 +47,15 @@ import io.github.muddz.styleabletoast.StyleableToast;
 
 public class Pedido extends AppCompatActivity {
 
+
+    private Bitmap bitmap;
+    ImageView ImagenPedido;
     AsyncHttpClient pedido;
     Button btnAgregarP, btnImagen, btnFecha;
     EditText txtFecha, txtTotal, txtNombreC, txtAbono, txtDescripcion;
     CheckBox cbNuevo;
     Spinner spTipoPedido, spCliente;
-    private  int dia,mes,ano;
+    private  int dia,mes,ano, PICK_IMAGE_REQUEST=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +72,7 @@ public class Pedido extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txtDescripcion);
         btnImagen = findViewById(R.id.btnImagen);
         btnFecha = findViewById(R.id.btnFecha);
-
+        ImagenPedido = findViewById(R.id.ImagenPedido);
         pedido = new AsyncHttpClient();
         txtFecha.setEnabled(false);
         txtNombreC.setEnabled(false);
@@ -67,6 +81,7 @@ public class Pedido extends AppCompatActivity {
         ClienteNuevo();
         GuardarPedido();
         Fecha();
+        BuscarImagen();
 
 
     }
@@ -77,7 +92,7 @@ public class Pedido extends AppCompatActivity {
         btnAgregarP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EjecutarServicio("https://emideli.online/addPedido.php");
+                EjecutarServicio("https://emideli.online/Carga.php");
             }
         });
     }
@@ -154,36 +169,30 @@ public class Pedido extends AppCompatActivity {
 
     //Enviar los datos del pedido al web service para ingresar a la base de datos
     private void EjecutarServicio(String URL) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        final ProgressDialog loading = ProgressDialog.show(this,"Subiendo...","Espere por favor...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    new StyleableToast
-                            .Builder(getApplicationContext())
-                            .text("Pedido Ingresado")
-                            .textColor(Color.BLACK)
-                            .backgroundColor(Color.TRANSPARENT)
-                            .show();
+                    loading.dismiss();
+                    Toast.makeText(Pedido.this, "Pedido Ingresado", Toast.LENGTH_SHORT).show();
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse (VolleyError error) {
-                    new StyleableToast
-                            .Builder(getApplicationContext())
-                            .text(Error.class.toString())
-                            .textColor(Color.BLACK)
-                            .backgroundColor(Color.TRANSPARENT)
-                            .show();
+                    loading.dismiss();
+                    Toast.makeText(Pedido.this, error.toString(), Toast.LENGTH_SHORT).show();
                 }
             })
             {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
+                    String Imagen = getStringImagen(bitmap);
                     Map<String, String> parametros = new HashMap<String, String>();
                     if (cbNuevo.isChecked()==true) {
                         parametros.put("TipoPedido", spTipoPedido.getSelectedItem().toString());
                         parametros.put("NombreC", txtNombreC.getText().toString());
                         parametros.put("Abono", txtAbono.getText().toString());
                         parametros.put("Fecha", txtFecha.getText().toString());
-                        parametros.put("Imagen", btnImagen.getText().toString());
+                        parametros.put("Imagen", Imagen);
                         parametros.put("Total", txtTotal.getText().toString());
                         parametros.put("Descripcion", txtDescripcion.getText().toString());
                     }else {
@@ -191,44 +200,84 @@ public class Pedido extends AppCompatActivity {
                         parametros.put("NombreC", spCliente.getSelectedItem().toString());
                         parametros.put("Abono", txtAbono.getText().toString());
                         parametros.put("Fecha", txtFecha.getText().toString());
-                        parametros.put("Imagen", btnImagen.getText().toString());
+                        parametros.put("Imagen", Imagen);
                         parametros.put("Total", txtTotal.getText().toString());
                         parametros.put("Descripcion", txtDescripcion.getText().toString());
                     }
-
                     return parametros;
                 }
             };
             RequestQueue requestQueue= Volley.newRequestQueue(this);
             requestQueue.add (stringRequest);
-
-
         }
 
-        //Funcion del boton para ingresar la fecha de entrega
-        private void Fecha() {
-            btnFecha.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (v == btnFecha) {
-                        final Calendar c = Calendar.getInstance();
-                        dia = c.get(Calendar.DAY_OF_MONTH);
-                        mes = c.get(Calendar.MONTH);
-                        ano = c.get(Calendar.YEAR);
+    //Funcion del boton para ingresar la fecha de entrega
+    private void Fecha() {
+        btnFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v == btnFecha) {
+                    final Calendar c = Calendar.getInstance();
+                    dia = c.get(Calendar.DAY_OF_MONTH);
+                    mes = c.get(Calendar.MONTH);
+                    ano = c.get(Calendar.YEAR);
 
-                        DatePickerDialog datePickerDialog = new DatePickerDialog(Pedido.this, new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                txtFecha.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
-                            }
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(Pedido.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            txtFecha.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
                         }
-                                , ano, mes, dia);
-
-                        datePickerDialog.show();
                     }
+                            , ano, mes, dia);
+
+                    datePickerDialog.show();
                 }
-            });
+            }
+        });
+    }
+
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+                //Cómo obtener el mapa de bits de la Galería
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Configuración del mapa de bits en ImageView
+                ImagenPedido.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public String getStringImagen(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    public void BuscarImagen() {
+
+        btnImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFileChooser();
+            }
+        });
+
+    }
 
 
 }
