@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="4dp"
-    android:maxHeight="650px">
+    android:maxWidth="1100px"
+    android:maxHeight="550px">
 
     //Etiqueta de datos
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="407dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="8dp"
-        android:alpha="0.2"
+        android:id="@+id/imageView9"
+        android:layout_width="1200px"
+        android:layout_height="700px"
+        android:layout_marginTop="3dp"
+        android:alpha="0.3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo_calendario" />
+        app:srcCompat="@drawable/calendariofo" />
 
     <TextView
         android:id="@+id/txt_nombre1"
@@ -171,7 +173,6 @@
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/txt_Total1"
         app:layout_constraintTop_toBottomOf="@+id/txtAbonoMuestra" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

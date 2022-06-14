@@ -51,7 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             txtFechaEntrega = itemView.findViewById(R.id.txtFechaEntregaMuestra);
             txtDescripcion = itemView.findViewById(R.id.txtDescripcionMuestra);
             txtAbono = itemView.findViewById(R.id.txtAbonoMuestra);
-            txtTotalPedido = itemView.findViewById(R.id.txtTipoPedidoMuestra);
+            txtTotalPedido = itemView.findViewById(R.id.txtTotalPagarMuestra);
         }
     }
 }
