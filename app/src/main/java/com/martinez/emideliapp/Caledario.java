@@ -51,12 +51,12 @@ public class Caledario extends AppCompatActivity {
                             for (int i = 0; i < responseArray.length(); i++) {
                                 JSONObject row = responseArray.getJSONObject(i);
                                 Cliente cliente = new Cliente(
-                                        row.getString("nombre_cliente"),
+                                        row.getString("title"),
                                         row.getString("tipo_pedido"),
-                                        row.getString("fecha_Entrega"),
+                                        row.getString("end"),
                                         row.getString("descripcion"),
                                         row.getString("abono"),
-                                        row.getString("total_pedido"));
+                                        row.getString("total"));
                                 clientes.add(cliente);
                             }
                             adapter.notifyDataSetChanged();

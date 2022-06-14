@@ -9,6 +9,21 @@
     tools:context=".Pedido">
 
     <Button
+        android:id="@+id/btnFecha"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="148dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Agregar Imagen"
+        android:textColor="@color/color_buttons"
+        app:layout_constraintEnd_toStartOf="@+id/txtEntrega"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImagenPedido"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
         android:id="@+id/btnIngresarP"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="107dp"
@@ -103,14 +118,13 @@
         android:id="@+id/txtEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Fecha de entrega"
         android:inputType="date"
         android:textColorHint="@color/color_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spTipoPedido"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -154,10 +168,11 @@
         android:text="Agregar Imagen"
         android:textColor="@color/color_buttons"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescripcion"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ImagenPedido"
         android:layout_width="95dp"
         android:layout_height="94dp"
         android:layout_marginTop="14dp"
