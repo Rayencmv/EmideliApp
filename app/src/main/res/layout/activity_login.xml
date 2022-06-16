@@ -54,8 +54,8 @@
     <Button
         android:id="@+id/btnIniciar"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="148dp"
         android:fontFamily="@font/aleo"
         android:text="Ingresar"

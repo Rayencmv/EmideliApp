@@ -8,6 +8,18 @@
     android:background="@color/color_background"
     tools:context=".Pedido">
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="72dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="Cliente:"
+        android:textColor="@color/color_text"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbNuevo" />
+
     <Button
         android:id="@+id/btnFecha"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -15,8 +27,9 @@
         android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Agregar Imagen"
+        android:text="Seleccione Fecha"
         android:textColor="@color/color_buttons"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/txtEntrega"
         app:layout_constraintHorizontal_bias="0.409"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,13 +40,12 @@
         android:id="@+id/btnIngresarP"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="107dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="36dp"
         android:text="Agregar"
-        android:textColor="@color/color_buttons"
-        android:textSize="13sp"
+        android:textColor="@color/color_hint"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAbono"
         tools:ignore="TouchTargetSizeCheck" />
@@ -41,7 +53,7 @@
     <EditText
         android:id="@+id/txtTotal"
         android:layout_width="163dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
         android:ems="10"
@@ -78,10 +90,10 @@
 
     <CheckBox
         android:id="@+id/cbNuevo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="131dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
         android:text="Cliente Nuevo"
         android:textColor="@color/color_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,12 +101,13 @@
 
     <Spinner
         android:id="@+id/spTipoPedido"
-        style="@style/Widget.AppCompat.Spinner.DropDown"
-        android:layout_width="279dp"
+        style="@android:style/Widget.Spinner.DropDown"
+        android:layout_width="260dp"
         android:layout_height="48dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:contextClickable="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spCliente"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -103,7 +116,7 @@
         android:id="@+id/txtAbono"
         style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="163dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
         android:ems="10"
@@ -111,38 +124,39 @@
         android:inputType="textPersonName"
         android:textColorHint="@color/color_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEntrega"
+        app:layout_constraintTop_toBottomOf="@+id/btnFecha"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/txtEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Fecha de entrega"
         android:inputType="date"
         android:textColorHint="@color/color_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spTipoPedido"
+        app:layout_constraintTop_toBottomOf="@+id/btnImagen"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/spCliente"
-        android:layout_width="279dp"
+        style="@android:style/Widget.Spinner.DropDown"
+        android:layout_width="260dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.901"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombreC"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/txtDescripcion"
-        android:layout_width="269dp"
-        android:layout_height="50dp"
+        android:layout_width="353dp"
+        android:layout_height="100dp"
         android:layout_marginTop="36dp"
         android:ems="10"
         android:gravity="start|top"
@@ -150,10 +164,9 @@
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
         android:scrollHorizontally="false"
-        android:textColor="@color/color_text"
         android:textColorHint="@color/color_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.634"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spTipoPedido"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -167,6 +180,7 @@
         android:layout_marginEnd="16dp"
         android:text="Agregar Imagen"
         android:textColor="@color/color_buttons"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescripcion"
         tools:ignore="TouchTargetSizeCheck" />
@@ -193,5 +207,17 @@
         android:textColorHint="@color/color_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="73dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        android:text="Pedido:"
+        android:textColor="@color/color_text"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
