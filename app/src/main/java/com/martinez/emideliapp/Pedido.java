@@ -179,7 +179,7 @@ public class Pedido extends AppCompatActivity {
         },new Response.ErrorListener(){
             public void onErrorResponse (VolleyError error) {
                 loading.dismiss();
-                Toast.makeText(Pedido.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Pedido.this, "Faltan Datos en el Pedido", Toast.LENGTH_SHORT).show();
             }
         })
         {
